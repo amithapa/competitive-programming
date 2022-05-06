@@ -7,3 +7,17 @@ Copy the file from [here](https://github.com/gcc-mirror/gcc/blob/master/libstdc%
 ```
 /Library/Developer/CommandLineTools/usr/include/c++/v1
 ```
+
+```c++
+memset(bucket, 0, sizeof(bucket));
+```
+# Sorting
+
+- Ascending order
+```c++
+sort(v.begin(), v.end());
+```
+- Decending Order
+```c++
+sort(v.rbegin(), v.rend());
+```
