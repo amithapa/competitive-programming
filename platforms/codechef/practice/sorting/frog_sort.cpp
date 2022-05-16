@@ -51,29 +51,80 @@ The remaining 4 sticks can can be paired as (1st and 3rd) and (2nd and 5th) to f
 #include <climits>
 using namespace std;
 
+void solve_2() {
+    int n, no_of_taps, current_position, last_position, index;
+    cin >> n;
+    int w[n+1], l[n+1];
+    vector<pair<int, int>> weights_with_position(n);
+    
+    for(int i =0; i < n; i++)
+        cin >> w[i];
+
+    for(int i =0; i < n; i++)
+        cin >> l[i];
+
+    for(int i=0; i < n; i++)
+        weights_with_position[i] = {w[i], i};
+    
+    sort(weights_with_position.begin(), weights_with_position.end());
+
+    last_position = weights_with_position[0].second;
+    no_of_taps = 0;
+
+    for(int i=1; i < n; i++) {
+        current_position = weights_with_position[i].second;
+        index = weights_with_position[i].second;
+        
+        while (current_position <= last_position ) {
+            current_position += l[index];
+            no_of_taps++;
+        }
+        last_position = current_position;
+    }
+    cout << no_of_taps << "\n";
+}
+
+void solve() {
+    int n, no_of_taps, current_position, last_position, index, diff;
+    cin >> n;
+    int w[n+1], l[n+1];
+    vector<pair<int, int>> weights_with_position(n);
+    
+    for(int i =0; i < n; i++)
+        cin >> w[i];
+
+    for(int i =0; i < n; i++)
+        cin >> l[i];
+
+    for(int i=0; i < n; i++)
+        weights_with_position[i] = {w[i], i};
+    
+    sort(weights_with_position.begin(), weights_with_position.end());
+
+    last_position = weights_with_position[0].second;
+    no_of_taps = 0;
+
+    for(int i=1; i < n; i++) {
+        current_position = weights_with_position[i].second;
+        index = weights_with_position[i].second;
+        
+        diff = (current_position <= last_position ) ? ((last_position - current_position + l[index]) / l[index]): 0;
+        no_of_taps += diff;
+        last_position = current_position + diff * l[index];
+    }
+    cout << no_of_taps << "\n";
+}
+
 int main() {
     std::ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
     
-    int n, d, t;
-    cin >> n >> d;
-    int lengths[n+1], local_diff, count=0;
-    for (int i=0; i < n; i++) {
-        cin >> lengths[i];
+    int t;
+    cin >> t;
+    while(t--) {
+        solve();
     }
-    sort(lengths, lengths+n);
 
-    for(int i=0; i < n-1;) {
-        local_diff = lengths[i+1] - lengths[i];
-        if(local_diff <= d) {
-            count += 1;
-            i+= 2;
-        } else {
-            i += 1;
-        }
-            
-    }
-    cout << count << "\n";
     return 0;
 }
