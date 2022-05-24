@@ -1,0 +1,54 @@
+# include <iostream>
+# include <vector>
+using namespace std;
+
+bool dfs(vector<int> graph[], int s, bool visited[]) {
+    if (visited[s]) return;
+    
+    visited[s] = true;
+    for (auto v: graph[s]) {
+        dfs(graph, v, visited);
+    }
+}
+
+bool hasCycle(int n, vector<int> graph[], int s) {
+    bool visited[n];
+    for (int i = 0; i < n; i++) {
+        visited[i] = false;
+    }
+    return dfs(graph, s, visited);
+
+}
+
+
+int main() {
+    int N = 6;
+    vector<int> graph[N];
+
+    graph[1].push_back(2);
+    graph[1].push_back(4);
+
+
+    graph[2].push_back(1);
+    graph[2].push_back(5);
+
+    graph[3].push_back(2);
+    graph[3].push_back(5);
+
+    graph[4].push_back(1);
+
+    graph[5].push_back(2);
+    graph[5].push_back(3);
+
+
+
+
+    if (dfs(N, graph, 1)) {
+        cout << "Is connected\n";
+    } else {
+        cout << "Is not connected\n";
+    }
+
+
+    return 0;
+}

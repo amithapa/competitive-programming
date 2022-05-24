@@ -1,0 +1,1 @@
+isConnected(n, graph, 1)
