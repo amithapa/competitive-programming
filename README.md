@@ -23,9 +23,39 @@ sort(v.begin(), v.end());
 sort(v.rbegin(), v.rend());
 ```
 
+# Reversing
+```c++
+reverse(path.begin(), path.end());
+```
+
 ## Optimizing cin/cout
 ```c++
 std::ios_base::sync_with_stdio(false);
 cin.tie(0);
 cout.tie(0);
+```
+
+## Using queues
+
+```c++
+queue<int> q;
+
+q.push(v);
+q.empty()
+
+q.front(); 
+q.pop();
+```
+
+## Setting defualt values
+```c++
+memset(vis, 0, sizeof(vis));
+```
+
+### Maximum Number
+```c++
+
+#include <climits>
+
+INT_MAX
 ```
